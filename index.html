@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="candy">
+<head>
+    <meta charset="utf-8">
+    <title>CandyMe</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="sercinci">
+    <meta name="description" content="Customize your candies!">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Emilys+Candy" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="assets/ng-img-crop.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/ng-img-crop.css">
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body ng-controller="candyCtrl" ng-cloak>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="">CandyMe</a>
+
+            <ul class="pure-menu-list">
+                <!--<li class="pure-menu-item pure-menu-selected"><a href="#home" class="pure-menu-link">Home</a></li>-->
+                <!--<li class="pure-menu-item"><a href="#app" class="pure-menu-link">Customize</a></li>
+                <li class="pure-menu-item"><a href="#info" class="pure-menu-link">Info</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+    <div class="splash-container" id="home">
+        <video width="100%" autoplay loop>
+            <source src="assets/movie.mp4" type="video/mp4">
+        </video>
+        <div class="mask"></div>
+        <div class="splash">
+            <h1 class="splash-head">CandyMe</h1>
+            <p class="splash-subhead">
+                Share sweet emotions
+            </p>
+            <p>
+                <a href="" ng-click="scrollTo('start')" class="pure-button pure-button-primary">Get Started</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper" id="start">
+        <div class="content">
+            <h2 class="content-head is-center">Follow these simple greedy steps</h2>
+
+            <div class="pure-g candySteps">
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 stepBox" ng-class="{'boxAnim': step == 1}">
+
+                    <h3 class="content-subhead">
+                        <i>1</i>
+                        Choose the candy
+                    </h3>
+                    <p>
+                        Which type of candy would you like to costumize?
+                    </p>
+                    <div class="stepForm pure-g" ng-show="step == 1">
+                        <div class="pure-u-1-2 selectBox" ng-click="chooseType('chocolate')">
+                            <img src="assets/images/choco.jpg">
+                        </div>
+                        <div class="pure-u-1-2 selectBox" ng-click="chooseType('macaron')">
+                            <img src="assets/images/macaron.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 stepBox" ng-class="{'boxAnim': step == 2}" id="step_2">
+                    <h3 class="content-subhead">
+                        <i>2</i>
+                        Choose the taste and color
+                    </h3>
+                    <p>
+                        Your favourite flavour and appearance (yum!!)
+                    </p>
+                    <div class="stepForm pure-g" ng-show="step == 2 && candy.type == 'chocolate'">
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('dark')">
+                            <span class="fa fa-square fa-5x dark"></span><br>
+                            Dark
+                        </div>
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('milk')">
+                            <span class="fa fa-square fa-5x milk"></span><br>
+                            Milk
+                        </div>
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('white')">
+                            <span class="fa fa-square fa-5x white"></span><br>
+                            White
+                        </div>
+                    </div>
+                    <div class="stepForm pure-g" ng-show="step == 2 && candy.type == 'macaron'">
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('raspberry')">
+                            <span class="fa fa-circle fa-5x raspberry"></span><br>
+                            Raspberry
+                        </div>
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('pistachio')">
+                            <span class="fa fa-circle fa-5x pistachio"></span><br>
+                            Pistachio
+                        </div>
+                        <div class="pure-u-1-3 selectBox" ng-click="chooseChar('caramel')">
+                            <span class="fa fa-circle fa-5x caramel"></span><br>
+                            Caramel
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 stepBox" ng-class="{'boxAnim': step == 3}" id="step_3">
+                    <h3 class="content-subhead">
+                        <i>3</i>
+                        Choose your picture
+                    </h3>
+                    <p>
+                        Make your <span ng-bind="candy.char || 'tasty'"></span> <span ng-bind="candy.type || 'candy'"></span> unique!
+                    </p>
+                    <div class="stepForm pure-g" ng-show="step == 3">
+                        <div class="pure-u-1 selectBox">
+                            <input type="file" name="file" id="file">
+                            <button class="pure-button button-small" ng-click="upload()">Insert your picture</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 stepBox" ng-class="{'boxAnim': step == 4}">
+                    <h3 class="content-subhead">
+                        <i>4</i>
+                        Choose shape and dimension
+                    </h3>
+                    <p>
+                        Refine your creation
+                    </p>
+                    <div class="stepForm pure-g" ng-show="step == 4">
+                        <div class="pure-u-1-2">
+                            <span class="selectBox" ng-click="candy.shape = 'square'"><span class="fa fa-square"></span> <span ng-style="{'text-decoration': candy.shape == 'square' ? 'underline' : 'none'}">Square</span></span>
+                        </div>
+                        <div class="pure-u-1-2">
+                            <span class="selectBox" ng-click="candy.shape = 'circle'"><span class="fa fa-circle"></span> <span ng-style="{'text-decoration': candy.shape == 'circle' ? 'underline' : 'none'}">Circle</span></span>
+                        </div>
+                        <br>
+                        <div class="pure-u-1" style="margin-top: 30px;">
+                            <div class="cropArea">
+                                <img-crop image="picture" result-image="croppedPicture" change-on-fly='true' area-type="{{candy.shape}}"></img-crop>
+                            </div>
+                            <div style="margin: 30px 0; position: relative;">
+                                <span class="fa {{candy.type == 'macaron' ? 'fa-circle' : 'fa-square'}} {{candy.char}}" style="font-size: 270px;"></span>
+                                <img ng-src="{{croppedPicture}}" ng-style="{'border-radius': candy.shape == 'circle' ? '50%' : '0'}" style="position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%;">
+                            </div>
+                            <button class="pure-button">Add to my cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pure-u-md-1-4 pure-u-lg-2-8"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="content-head is-center">Don't lose our sweet news</h2>
+
+            <div class="pure-g" id="info">
+                <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+                    <form class="pure-form pure-form-stacked">
+                        <fieldset>
+
+
+                            <label for="email">Your Email</label>
+                            <input id="email" type="email" placeholder="Your Email">
+
+                            <button type="submit" class="pure-button">Subscribe</button>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+                    <h4>Contact Us</h4>
+                    <p>
+                        There are a lots of sweet things to discover. Are you a big company looking for something special? Write to us, we will surprise you.
+                    </p>
+
+                    <h4>More Information</h4>
+                    <p>
+                        Keep yourself update from our newsletter and follow us on the socials.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer l-box is-center">
+            Made with chocolate by the CandyMe team
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCqjLPhkIhEj92UuQv24bEwHGKlxg4vQBA",
+        authDomain: "candyme-14697.firebaseapp.com",
+        databaseURL: "https://candyme-14697.firebaseio.com",
+        projectId: "candyme-14697",
+        storageBucket: "candyme-14697.appspot.com",
+        messagingSenderId: "582014133370"
+      };
+      firebase.initializeApp(config);
+    </script>
+</body>
+</html>
